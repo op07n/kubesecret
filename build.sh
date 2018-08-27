@@ -15,7 +15,7 @@ GRADLE_SINK_JAR="./build/libs/kotlin-graalvm-example-1.0-SNAPSHOT-all.jar"
 
 #OPTS=""
 OPTS="-H:+ReportUnsupportedElementsAtRuntime -H:ReflectionConfigurationFiles=./reflection.json"
-OPTS="-H:+ReportUnsupportedElementsAtRuntime"
+OPTS="-O0 --verbose -H:+ReportUnsupportedElementsAtRuntime -H:ReflectionConfigurationFiles=./reflection-001.json"
 #OPTS="-H:ReflectionConfigurationFiles=./reflection.json -H:+ReportUnsupportedElementsAtRuntime -Dfile.encoding=UTF-8"
 #-H:PrintFlags=Expert
 #  --expert-options
