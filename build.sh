@@ -8,13 +8,14 @@ native-image --version
 
 GRAALVM_HOME="$HOME/.sdkman/candidates/java/1.0.0-rc5-graal"
 
-MAIN_CLASS_NAME="com.example.demo.App"
-COMPILER_SINK_FILE="build/helloworld"
+MAIN_CLASS_NAME="com.bastman.kubesecret.App"
+COMPILER_SINK_FILE="build/kubesecret.darwin-amd64"
 GRADLE_COMMAND="./gradlew clean shadowJar"
 GRADLE_SINK_JAR="./build/libs/kotlin-graalvm-example-1.0-SNAPSHOT-all.jar"
 
 #OPTS=""
-OPTS="-H:+ReportUnsupportedElementsAtRuntime -H:ReflectionConfigurationFiles=./reflection-001.json"
+OPTS="-H:+ReportUnsupportedElementsAtRuntime -H:ReflectionConfigurationFiles=./reflection.json"
+OPTS="-H:+ReportUnsupportedElementsAtRuntime"
 #OPTS="-H:ReflectionConfigurationFiles=./reflection.json -H:+ReportUnsupportedElementsAtRuntime -Dfile.encoding=UTF-8"
 #-H:PrintFlags=Expert
 #  --expert-options
