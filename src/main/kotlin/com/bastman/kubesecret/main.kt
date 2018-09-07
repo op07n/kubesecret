@@ -18,5 +18,16 @@ class App {
 }
 
 
-class Cli : NoRunCliktCommand(help = "An example that supports aliased subcommands")
+class Cli : NoRunCliktCommand(
+        help = """|
+            |kubesecret
+            |
+            |a cli tool read/decode k8s secrets
+            |
+        """.trimMargin(),
+        epilog = """|
+            |Build with: Kotlin, GraalVM (native-image)
+            |
+        """.trimMargin()
+)
 

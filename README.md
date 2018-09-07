@@ -1,11 +1,16 @@
 # kubesecret (POC)
 
+
+![Alt text](docs/kubesecret_screenshot.png?raw=true "screenshot")
+
+## What?
 - poc: compile kotlin to graalvm native-image (on osx)
 - artifact: a cli application to read k8s secrets
 
 - why? I need a cli tool to base64 decode a k8s secret.yml
 
-### Download Release (OSX)
+
+## Download Release (OSX)
 
 - here: https://github.com/bastman/kubesecret/tree/master/release
 
@@ -15,7 +20,7 @@ $ wget https://github.com/bastman/kubesecret/raw/master/release/kubesecret.darwi
 
 ```
 
-### examples 
+## Usage examples 
 
 ```
 # help
