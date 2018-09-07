@@ -7,7 +7,7 @@ import com.github.ajalt.clikt.parameters.options.option
 
 
 class ListSecrets() : CliktCommand(
-        help = "get secrets",
+        help = "list secrets (requires kubectl)",
         name = "list"
 ) {
     private val ns: String? by option("--namespace", help = "the k8s namespace")

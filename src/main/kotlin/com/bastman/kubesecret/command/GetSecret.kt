@@ -9,7 +9,7 @@ import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 
 class GetSecret() : CliktCommand(
-        help = "get secret",
+        help = "get secret (requires kubectl)",
         name = "get"
 ) {
     private val ns: String? by option("--namespace", help = "the k8s namespace")

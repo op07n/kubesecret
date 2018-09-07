@@ -5,6 +5,16 @@
 
 - why? I need a cli tool to base64 decode a k8s secret.yml
 
+### Download Release (OSX)
+
+- here: https://github.com/bastman/kubesecret/tree/master/release
+
+```
+# download release from github (osx, wget)
+$ wget https://github.com/bastman/kubesecret/raw/master/release/kubesecret.darwin-amd64 && chmod +x ./kubesecret.darwin-amd64
+
+```
+
 ### examples 
 
 ```
