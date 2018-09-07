@@ -1,12 +1,27 @@
 #!/usr/bin/env sh
 set -e
 
-# sdk use java 1.0.0-rc5-graal
-alias native-image="$HOME/.sdkman/candidates/java/1.0.0-rc5-graal/bin/native-image"
+GRAAL_VERSION="1.0.0-rc6-graal"
+
+echo " ==== REQUIREMENTS ==== "
+# sdk use java 1.0.0-rc6-graal
+echo " $ sdk use java $GRAAL_VERSION "
+echo "And add this bash alias to your profile ... "
+# alias native-image="$HOME/.sdkman/candidates/java/1.0.0-rc6-graal/bin/native-image"
+echo "  alias native-image=\"$HOME/.sdkman/candidates/java/1.0.0-rc6-graal/bin/native-image\" "
+echo "========================"
+
+
+
+
+# --delay-class-initialization-to-runtime=Startup HelloCachedTime
+
+
+
 java -version
 native-image --version
 
-GRAALVM_HOME="$HOME/.sdkman/candidates/java/1.0.0-rc5-graal"
+GRAALVM_HOME="$HOME/.sdkman/candidates/java/$GRAAL_VERSION"
 
 MAIN_CLASS_NAME="com.bastman.kubesecret.App"
 COMPILER_SINK_FILE="build/kubesecret.darwin-amd64"
@@ -21,7 +36,9 @@ OPTS="-O0 --verbose -H:+ReportUnsupportedElementsAtRuntime -H:ReflectionConfigur
 #  --expert-options
 #OPTS="-H:+ReportUnsupportedElementsAtRuntime -Dfile.encoding=UTF-8"
 
-COMPILER_COMMAND="--verbose -cp ${GRADLE_SINK_JAR} -H:Name=${COMPILER_SINK_FILE} -H:Class=${MAIN_CLASS_NAME} ${OPTS}"
+#DELAY_STATIC_TO_RUNTIME=""
+DELAY_STATIC_TO_RUNTIME="--delay-class-initialization-to-runtime=shadow.kotlin.reflect.jvm.internal.impl.builtins.SuspendFunctionTypesKt"
+COMPILER_COMMAND="--verbose -cp ${GRADLE_SINK_JAR} -H:Name=${COMPILER_SINK_FILE} -H:Class=${MAIN_CLASS_NAME} ${OPTS} ${DELAY_STATIC_TO_RUNTIME}"
 
 
 echo "===== build & compile to native binary .... ===="
