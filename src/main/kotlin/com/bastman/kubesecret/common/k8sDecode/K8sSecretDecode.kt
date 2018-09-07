@@ -1,12 +1,12 @@
 package com.bastman.kubesecret.common.k8sDecode
 
-
 import com.bastman.kubesecret.util.Base64Codec
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 
-private val YAML = ObjectMapper(YAMLFactory()).findAndRegisterModules()
+private val YAML: ObjectMapper = ObjectMapper(YAMLFactory()).findAndRegisterModules()
+
 fun base64DecodeK8sSecretYml(sourceText: String): String {
     val source: HashMap = try {
         YAML.readValue(sourceText, jacksonTypeRef<HashMap>())
@@ -28,6 +28,7 @@ fun base64DecodeK8sSecretYml(sourceText: String): String {
     val sinkText: String = YAML.writeValueAsString(sink)
     return sinkText
 }
+
 private typealias HashMap = Map<String, Any?>
 private typealias MutableHashMap = MutableMap<String, Any?>
 

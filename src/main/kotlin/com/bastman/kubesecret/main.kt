@@ -17,7 +17,6 @@ class App {
     }
 }
 
-
 class Cli : NoRunCliktCommand(
         help = """|
             |kubesecret

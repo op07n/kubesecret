@@ -1,10 +1,8 @@
 package com.bastman.kubesecret.command
 
-
 import com.bastman.kubesecret.util.processBuilder
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.option
-
 
 class ListSecrets() : CliktCommand(
         help = "list secrets (requires kubectl)",

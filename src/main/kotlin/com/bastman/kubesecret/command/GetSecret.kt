@@ -39,9 +39,7 @@ class GetSecret() : CliktCommand(
     private fun exec(cmd: String) = when (base64Decode) {
         false -> execRaw(cmd = cmd)
         true -> execAndBase64Decode(cmd = cmd)
-
     }
-
 
     private fun execRaw(cmd: String) {
         val builder: ProcessBuilder = processBuilder(cmd = cmd)

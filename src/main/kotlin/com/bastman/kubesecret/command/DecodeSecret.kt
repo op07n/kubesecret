@@ -1,14 +1,10 @@
 package com.bastman.kubesecret.command
 
 import com.bastman.kubesecret.common.k8sDecode.base64DecodeK8sSecretYml
-import com.bastman.kubesecret.util.Base64Codec
 import com.bastman.kubesecret.util.readStdIn
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.optional
-
-private typealias HashMap = Map<String, Any?>
-private typealias MutableHashMap = MutableMap<String, Any?>
 
 class DecodeSecret() : CliktCommand(
         help = "base64 decode secret",
@@ -39,11 +35,5 @@ class DecodeSecret() : CliktCommand(
     }
 }
 
-private fun String.base64Decode(): String = Base64Codec.decode(this)
-private fun HashMap.withKey(key: String, value: Any?): HashMap {
-    val hashMap: MutableHashMap = this.toMutableMap()
-    hashMap[key] = value
-    return hashMap
-}
 
 
