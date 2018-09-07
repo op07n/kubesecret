@@ -78,3 +78,5 @@ echo "You may want to run your compiled binary ..."
 echo ""
 echo "Example: $ ./${COMPILER_SINK_FILE}"
 echo ""
+
+${COMPILER_SINK_FILE} --help

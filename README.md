@@ -1,4 +1,9 @@
-# kubesecret
+# kubesecret (POC)
+
+- poc: compile kotlin to graalvm native-image (on osx)
+- artifact: a cli application to read k8s secrets
+
+- why? I need a cli tool to base64 decode a k8s secret.yml
 
 ### examples 
 
