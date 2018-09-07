@@ -26,11 +26,11 @@ $ wget https://github.com/bastman/kubesecret/raw/master/release/kubesecret.darwi
 # help
 $ ./build/kubesecret.darwin-amd64 --help
 
-# list secrets (uses kubctl)
+# list secrets (uses kubectl)
 $ ./build/kubesecret.darwin-amd64 list --help
 $ ./build/kubesecret.darwin-amd64 list
 
-# get secret (uses kubctl)
+# get secret (uses kubectl)
 $ ./build/kubesecret.darwin-amd64 get --help
 $ ./build/kubesecret.darwin-amd64 get <SECRET_NAME>
 
