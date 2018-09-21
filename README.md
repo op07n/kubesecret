@@ -65,5 +65,15 @@ $ cat example-secrets/secret-plain.yaml | kubesecret base64-encode
 
 
 
-### graalvm docs
+### graalvm: docs
 - https://medium.com/graalvm/understanding-class-initialization-in-graalvm-native-image-generation-d765b7e4d6ed
+- http://royvanrijn.com/blog/2018/09/part-1-java-to-native-using-graalvm/
+
+### graalvm: install
+- get sdkman: https://sdkman.io/
+
+```
+ $ sdk list java
+ $ sdk install java 1.0.0-rc6-graal
+ $ sdk use java 1.0.0-rc6-graal
+```
