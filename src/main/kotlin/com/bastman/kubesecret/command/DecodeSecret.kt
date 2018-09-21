@@ -1,38 +1,32 @@
 package com.bastman.kubesecret.command
 
-import com.bastman.kubesecret.common.k8sDecode.base64DecodeK8sSecretYml
-import com.bastman.kubesecret.util.readStdIn
+import com.bastman.kubesecret.common.k8s.secret.K8sSecretYml
+import com.bastman.kubesecret.common.k8s.secret.K8sSecretYmlPipeline
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.optional
 
 class DecodeSecret() : CliktCommand(
-        help = "base64 decode secret",
+        help = "base64 decode secret (source e.g.: base64-encoded.yaml -> sink e.g.: plain-text.yaml)",
         name = "base64-decode"
 ) {
     private val input: String? by argument().optional()
 
-    override fun run() {
-        val sourceText: String = when (input) {
-            null -> readStdIn()
-            else -> input ?: ""
-        }
-        if (sourceText.isBlank()) {
-            System.err.println("INPUT must not be empty!")
-            System.exit(1)
-        }
-        try {
-            exec(sourceText = sourceText)
-        } catch (all: Exception) {
-            System.err.println("Command failed! reason: ${all.message} !")
-            System.exit(1)
-        }
-    }
+    override fun run(): Unit =
+            try {
+                pipeline()
+            } catch (all: Exception) {
+                System.err.println("Command failed! reason: ${all.message} !")
+                System.exit(1)
+            }
 
-    private fun exec(sourceText: String) {
-        val sinkYmlText: String = base64DecodeK8sSecretYml(sourceText)
-        println(sinkYmlText)
-    }
+    private fun pipeline(): Unit = input
+            .asSourceOrReadStdIn()
+            .requireInputIsNotBlankOrExit()
+            .decodeYml()
+            .let(::println)
+
+    companion object : K8sSecretYml, K8sSecretYmlPipeline
 }
 
 

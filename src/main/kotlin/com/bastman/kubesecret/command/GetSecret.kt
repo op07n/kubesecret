@@ -1,6 +1,6 @@
 package com.bastman.kubesecret.command
 
-import com.bastman.kubesecret.common.k8sDecode.base64DecodeK8sSecretYml
+import com.bastman.kubesecret.common.k8s.secret.K8sSecretYml
 import com.bastman.kubesecret.util.bufferedInputStreamReader
 import com.bastman.kubesecret.util.processBuilder
 import com.github.ajalt.clikt.core.CliktCommand
@@ -8,8 +8,8 @@ import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 
-class GetSecret() : CliktCommand(
-        help = "get secret (requires kubectl)",
+class GetSecret : CliktCommand(
+        help = "get secret <SECRET_NAME> --base64-decode (requires kubectl)",
         name = "get"
 ) {
     private val ns: String? by option("--namespace", help = "the k8s namespace")
@@ -22,11 +22,6 @@ class GetSecret() : CliktCommand(
             cmdWithArgs += "--namespace $ns"
         }
         val cmd: String = cmdWithArgs.joinToString(separator = " ")
-
-        when (base64Decode) {
-            false -> execRaw(cmd = cmd)
-            true -> execAndBase64Decode(cmd = cmd)
-        }
 
         try {
             exec(cmd = cmd)
@@ -60,9 +55,12 @@ class GetSecret() : CliktCommand(
         if (exitCode != 0) {
             System.exit(exitCode)
         }
-        val sourceText: String = process.bufferedInputStreamReader().readText()
-        val sinkText: String = base64DecodeK8sSecretYml(sourceText = sourceText)
-
-        println(sinkText)
+        process
+                .bufferedInputStreamReader()
+                .readText()
+                .decodeYml()
+                .let(::println)
     }
+
+    companion object : K8sSecretYml
 }

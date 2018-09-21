@@ -66,11 +66,30 @@ native-image ${COMPILER_COMMAND}
 
 set -e +x
 
+# test the stuff
+./${COMPILER_SINK_FILE} --help
+./${COMPILER_SINK_FILE} list --help
+./${COMPILER_SINK_FILE} get --help
+./${COMPILER_SINK_FILE} base64-encode --help
+./${COMPILER_SINK_FILE} base64-decode --help
+cat ./example-secrets/secret-plain.yaml | ./${COMPILER_SINK_FILE} base64-encode
+cat ./example-secrets/secret.yaml | ./${COMPILER_SINK_FILE} base64-decode
+
 echo ""
 echo "Done."
 echo "You may want to run your compiled binary ..."
 echo ""
-echo "Example: $ ./${COMPILER_SINK_FILE}"
+echo "Usage Examples"
+echo ""
+echo "$ ./${COMPILER_SINK_FILE}"
+echo ""
+echo "# requires kubectl"
+echo "$ ./${COMPILER_SINK_FILE} list"
+echo "$ ./${COMPILER_SINK_FILE} get <YOUR_K8S_SECRET> --base64-decode"
+echo ""
+echo "# without kubectl"
+echo "$ cat example-secrets/secret-plain.yaml | ./${COMPILER_SINK_FILE} base64-encode"
+echo "$ cat example-secrets/secret.yaml | ./${COMPILER_SINK_FILE} base64-decode"
 echo ""
 
 ${COMPILER_SINK_FILE} --help
