@@ -24,6 +24,7 @@ class EncodeSecret() : CliktCommand(
             .asSourceOrReadStdIn()
             .requireInputIsNotBlankOrExit()
             .encodeYml()
+            .toYml()
             .let(::println)
 
     companion object : K8sSecretYml, K8sSecretYmlPipeline

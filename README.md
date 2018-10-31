@@ -50,7 +50,13 @@ $ kubesecret list
 
 # get secret (uses kubectl)
 $ kubesecret get --help
-$ kubesecret get <SECRET_NAME> --base64-decode
+$ kubesecret get <SECRET_NAME>
+$ kubesecret get <SECRET_NAME> --transform=none --output-format=yml
+$ kubesecret get <SECRET_NAME> --transform=none --output-format=bash
+$ kubesecret get <SECRET_NAME> --transform=base64-decode --output-format=yml
+$ kubesecret get <SECRET_NAME> --transform=base64-decode --output-format=bash
+$ kubesecret get <SECRET_NAME> --transform=base64-encode --output-format=yml
+$ kubesecret get <SECRET_NAME> --transform=base64-encode --output-format=bash
 
 # base64-decode secret
 $ kubesecret base64-decode --help

@@ -24,6 +24,7 @@ class DecodeSecret() : CliktCommand(
             .asSourceOrReadStdIn()
             .requireInputIsNotBlankOrExit()
             .decodeYml()
+            .toYml()
             .let(::println)
 
     companion object : K8sSecretYml, K8sSecretYmlPipeline
