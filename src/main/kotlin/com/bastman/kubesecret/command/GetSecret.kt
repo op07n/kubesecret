@@ -7,6 +7,7 @@ import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
+import java.time.Instant
 
 enum class Transform(val cliValue: String) {
     NONE(cliValue = "none"),
@@ -128,12 +129,14 @@ class GetSecret : CliktCommand(
                 }.let {
                     when (outputFormat) {
                         OutputFormat.YML -> it.toYml()
-                        OutputFormat.BASH -> it.toBashProfile(
-                                prolog =
-                                "# kubesecret: ${listOf(ns, name).filterNotNull().joinToString(separator = " ")}\n"
-                        )
+                        OutputFormat.BASH -> it.toBashProfile(prolog = bashProfileProlog())
                     }
                 }.let(::println)
+    }
+
+    private fun bashProfileProlog():String {
+        val namespacedSecretName:String = listOf(ns, name).filterNotNull().joinToString(separator = "/")
+        return "# kubesecret: $namespacedSecretName (${Instant.now()})\n"
     }
 
     companion object : K8sSecretYml

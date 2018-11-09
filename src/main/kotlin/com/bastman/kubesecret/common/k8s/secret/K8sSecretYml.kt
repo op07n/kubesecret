@@ -16,7 +16,7 @@ interface K8sSecretYml {
         val sourceData = this["data"] as HashMap
         val lines:List<String> = sourceData.map {
             val value: String = it.value as String
-            "export ${it.key}=$value"
+            "export ${it.key}=\"$value\""
         }
         return "$prolog${lines.joinToString(separator = "\n")}"
     }
