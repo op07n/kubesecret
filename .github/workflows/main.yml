@@ -17,5 +17,6 @@ jobs:
       - name: Build 
         run: |
          ./gradlew build
+         tree .
 #      - name: Upload
 #        run: ./gradlew bintrayUploadAll -Dbintray_key=${{ secrets.bintray_key }}
