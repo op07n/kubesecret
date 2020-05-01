@@ -1,3 +1,6 @@
+Duplicate of https://github.com/bastman/kubesecret
+
+
 # kubesecret (poc)
 
 ## what?
